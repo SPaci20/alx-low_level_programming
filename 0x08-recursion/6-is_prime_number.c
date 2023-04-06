@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * _is_prime_recursion - checks if a number is prime using recursion
- * is_prime_number - checks if a number is prime
+ * is_prime_number - Return 1 if integer is prime or 0 if not 
  * @n: the number to check
  * @divisor: the current divisor being tested for primality
  * Return: 1 if n is prime, 0 otherwise
