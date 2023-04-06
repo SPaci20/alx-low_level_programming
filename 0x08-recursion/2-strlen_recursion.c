@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _strlen_recursion : calculate the length of the string
+ * _strlen_recursion - calculate the length of the string
  *
  * @s: String to receive
  * Return: int
