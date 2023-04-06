@@ -26,6 +26,8 @@ int _is_prime_recursion(int n, int divisor)
 
 /**
  *  is_prime_number - Checks given integer is a prime number or not
+ *  @n: the value of integer
+ *  Return: 1 if n is prime, 0 otherwise
  */
 int is_prime_number(int n)
 {
