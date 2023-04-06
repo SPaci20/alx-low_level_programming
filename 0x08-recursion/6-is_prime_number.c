@@ -1,23 +1,31 @@
 #include "main.h"
 /**
- * _is_prime_number - Return 1 for prime number otherwise 0
- * @n: Value of number
- * Return: 1 or 0
+ * _is_prime_recursion - checks if a number is prime using recursion
+ *
+ * @n: the number to check
+ * @divisor: the current divisor being tested for primality
+ * Return: 1 if n is prime, 0 otherwise
  */
-int is_prime_number(int n)
-{
-	int i;
 
+int _is_prime_recursion(int n, int divisor)
+{
 	if (n <= 1)
 	{
 		return (0);
 	}
-	for (i = 2; i * i <= n; i++)
+	if (divisor == 1)
 	{
-		if (n % i == 0)
-		{
-			return (0);
-		}
+		return (1);
 	}
-	return (1);
+	if (n % divisor == 0)
+	{
+		return (0);
+	}
+	return (_is_prime_recursion(n, divisor - 1));
 }
+
+int is_prime_number(int n)
+{
+	return (_is_prime_recursion(n, n - 1));
+}
+
