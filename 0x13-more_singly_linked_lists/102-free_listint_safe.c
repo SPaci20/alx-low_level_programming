@@ -1,39 +1,30 @@
 #include "lists.h"
 
 /**
- * free_listint_safe - Frees a listint_t list.
- * @h: Double pointer to the head of the list.
- * Return: The size of the list that was free'd.
+ * free_listint_safe - Frees a listint_t list safely
+ * @h: Double pointer to the head of the list
+ * Return: The size of the list that was freed
  */
 size_t free_listint_safe(listint_t **h)
 {
 	size_t count = 0;
-	listint_t *current, *temp;
+	listint_t *current, *next;
 
-	if (!h)
+	if (h == NULL)
 		return (0);
 
 	current = *h;
-	while (current)
+	*h = NULL;
+
+	while (current != NULL)
 	{
 		count++;
-		if (current > current->next)
-		{
-			printf("Freeing [%p] %d\n", (void *)current, current->n);
-			temp = current->next;
-			free(current);
-			current = temp;
-		}
-		else
-		{
-			printf("Freeing [%p] %d\n", (void *)current, current->n);
-			free(current);
-			*h = NULL;
-
-			return (count);
-		}
+		next = current->next;
+		free(current);
+		if (next >= current)
+			break;
+		current = next;
 	}
 
-	*h = NULL;
 	return (count);
 }
