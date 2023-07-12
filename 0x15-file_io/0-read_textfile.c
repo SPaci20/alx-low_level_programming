@@ -1,52 +1,29 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
- * read_textfile - Reads a text file and prints it to POSIX standard output.
- * @filename: The name of the file to read.
- * @letters: The number of letters to read and print.
+ * read_textfile - Read text file and print to STDOUT.
+ * @filename: Text file being read.
+ * @letters: Number of letters to be read.
  *
- * Return: The actual number of letters read and printed.
- *         0 if the file cannot be opened or read, or if filename is NULL.
- *         0 if the write fails or does not write the expected amount of bytes.
+ * Return: Number of bytes read and printed (w),
+ *         0 when the function fails or filename is NULL.
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	FILE *file;
-	char *buffer;
-	ssize_t read_bytes, written_bytes;
+	char *buf;
+	ssize_t fd;
+	ssize_t w;
+	ssize_t t;
 
-	if (filename == NULL)
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
 		return (0);
+	buf = malloc(sizeof(char) * letters);
+	t = read(fd, buf, letters);
+	w = write(STDOUT_FILENO, buf, t);
 
-	file = fopen(filename, "r");
-	if (file == NULL)
-		return (0);
-
-	buffer = malloc(sizeof(char) * (letters + 1));
-	if (buffer == NULL)
-	{
-		fclose(file);
-		return (0);
-	}
-
-	read_bytes = fread(buffer, sizeof(char), letters, file);
-	if (read_bytes == 0)
-	{
-		fclose(file);
-		free(buffer);
-		return (0);
-	}
-
-	written_bytes = fwrite(buffer, sizeof(char), read_bytes, stdout);
-	if (written_bytes != read_bytes)
-	{
-		fclose(file);
-		free(buffer);
-		return (0);
-	}
-
-	free(buffer);
-	fclose(file);
-
-	return (written_bytes);
+	free(buf);
+	close(fd);
+	return (w);
 }
