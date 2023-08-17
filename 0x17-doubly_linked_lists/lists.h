@@ -13,6 +13,8 @@ typedef struct dlistint_s
 
 /* Function prototype for printing a doubly linked list */
 size_t print_dlistint(const dlistint_t *h);
+/*function that returns the number of elements in a linked */
+size_t dlistint_len(const dlistint_t *h);
 
 #endif /* LISTS_H */
 
