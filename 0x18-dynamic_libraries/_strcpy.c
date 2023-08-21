@@ -1,4 +1,5 @@
-#include <stddef.h>
+#include "main.h"
+
 /**
  * _strcpy - Copies a string (including the terminating null byte)
  * @dest: The destination buffer
@@ -8,5 +9,5 @@
  */
 char *_strcpy(char *dest, char *src)
 {
-	/* Implementation goes here */
+	/* Empty implementation, you can fill in the code here */
 }
